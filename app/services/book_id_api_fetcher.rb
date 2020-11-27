@@ -14,8 +14,20 @@ class BookIdApiFetcher
     author = doc.search('name').first.text
     title = doc.at_xpath('//original_title').text
     isbn = doc.search('isbn').text
-    { description: full_description, image_url: image_url, author: author, isbn: isbn, title: title }
+
+    book_title = title.delete(" ")
+    google_url = "https://www.googleapis.com/books/v1/volumes?q=#{book_title}&langRestrict=en"
+    document_serialized = open(google_url).read
+    document = JSON.parse(document_serialized)
+    google_id = document['items'][0]['id']
+    google_id_url = "https://www.googleapis.com/books/v1/volumes/#{google_id}?key=#{ENV['GOOGLE_API_KEY']}"
+    google_document_serialized = open(google_id_url).read
+    google_doc = JSON.parse(google_document_serialized)
+    sm_thumbnail = google_doc['volumeInfo']['imageLinks']['smallThumbnail']
+    thumbnail = google_doc['volumeInfo']['imageLinks']['thumbnail']
+
+    { description: full_description, thumbnail: thumbnail, sm_thumbnail: sm_thumbnail, author: author, isbn: isbn, title: title }
   end
 end
 
-#  @books = BookIdApiFetcher.execute(value) 
+#  @books = BookIdApiFetcher.execute(value)
