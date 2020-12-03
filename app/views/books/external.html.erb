@@ -18,7 +18,9 @@
       <div class="col-md-8">
         <div class="card-body">
           <h3 class="card-title"><%= @external_book[:title] %></h3>
-          <h5 class="card-title"> <%= @external_book[:author] %></h5>
+          <% @external_book[:authors].each do |author| %>
+          <h5 class="card-title"> <%= author %></h5>
+          <% end %>
           <p class="card-text"><%= raw(@external_book[:description]) %></p>
         </div>
       </div>
