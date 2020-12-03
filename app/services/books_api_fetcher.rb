@@ -23,8 +23,11 @@ class BooksApiFetcher
 
       { authors: authors, title: title, image_url: image_url, book_id: book_id }
     end
+  end
+end
 
-    # book = doc.xpath('//best_book')[0...8].map do |best_book|  
+    # Previous API INFORMATION:
+    # book = doc.xpath('//best_book')[0...8].map do |best_book|
     #   author              = best_book.search('name').text.mb_chars.normalize(:kd).gsub(/[^\x00-\x7F]/n,'').downcase.to_s
     #   title               = best_book.search('title').text.mb_chars.normalize(:kd).gsub(/[^\x00-\x7F]/n,'').downcase.to_s
     #   book_title          = title.gsub(" ", "%20")
@@ -42,9 +45,3 @@ class BooksApiFetcher
     #   # book_id             = best_book.at_xpath('id').text
     #    { author: author, title: title, image_url: image_url, book_id: book_id }
     # end
-  end
-end
-
-
-
-
