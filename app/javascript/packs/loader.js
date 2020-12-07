@@ -8,3 +8,4 @@ const loader = () => {
 }
 
 export { loader }
+
